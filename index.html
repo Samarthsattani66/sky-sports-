@@ -4,126 +4,72 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TeamRohit45Official</title>
-<script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.1/dist/shaka-player.compiled.js"></script>
+<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+</head>
 <style>
-    body {
-        margin: 0;
-        background-color: black;
-    }
-
-    #videoContainer {
-        position: relative;
-        width: 100%;
-        height: 100vh; /* Full viewport height */
-        overflow: hidden;
-    }
-
-    video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensure video covers the entire container */
-    }
-
-    #watermark {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        color: white;
-        font-size: 16px;
-        font-family: Arial, sans-serif;
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-        padding: 5px 10px;
-        border-radius: 5px;
-    }
-
+body {
+    background-color: black;
+}
+#container {
+    background-color: black;
+}
     #telegramButton {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 200px;
-        height: 40px;
-        background: linear-gradient(90deg, darkblue, #001f3f);
-        color: white;
-        border-radius: 20px;
-        font-family: Arial, sans-serif;
-        cursor: pointer;
-        text-decoration: none;
-        font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 378px;
+      height: 50px;
+      background: linear-gradient(90deg, darkblue, #001f3f);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+      animation: flowAnimation 2s infinite;
+    }
+
+    @keyframes flowAnimation {
+      0% {
+        background-position: -200px 0;
+      }
+      100% {
+        background-position: 200px 0;
+        }
     }
 
     #telegramButton:hover {
-        background: linear-gradient(90deg, #001f3f, darkblue);
+      animation: none; /* Pause animation on hover */
+      background: linear-gradient(90deg, #001f3f, darkblue); /* Reverse colors on hover */
     }
-
-    #telegramIcon {
-        margin-right: 10px;
-        width: 20px;
-        height: 20px;
-    }
-</style>
-</head>
+  </style>
 <body>
-<div id="videoContainer">
-    <!-- Watermark -->
-    <div id="watermark">TEAMROHIT45OFFICIAL</div>
+<div id="video"></div>
 
-    <!-- Video player -->
-    <div id="video"></div>
-
-    <!-- Telegram Button -->
-    <a id="telegramButton" href="https://t.me/+3aJFsq2EJLg4NzI1" target="_blank">
-        <img id="telegramIcon" src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-        Join Telegram
-    </a>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const video = document.createElement('video');
-        video.controls = true;
-        video.autoplay = true;
-        video.muted = false;
-        video.style.width = '100%';
-        video.style.height = '100%';
-        document.getElementById('video').appendChild(video);
-
-        const player = new shaka.Player(video);
-
-        // Enable debugging
-        shaka.log.setLevel(shaka.log.Level.DEBUG);
-
-        // Listen for error events
-        player.addEventListener('error', (event) => {
-            console.error('Shaka Player Error:', event.detail);
-        });
-
-        // Configure DRM settings for multiple ClearKey keys
-        player.configure({
-            drm: {
-                clearKeys: {
-                    '6d1708b185c6c4d7b37600520c7cc93c': '1aace05f58d8edef9697fd52cb09f441', // Key 1
-                    '4e5c6d7f8e9a0b1c2d3e4f5a6789bcde': '123456789abcdef123456789abcdef00'  // Key 2 (replace with actual keys)
-                }
-            }
-        });
-
-        try {
-            // Load the DASH manifest
-            await player.load('https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd');
-            console.log('The video has been loaded successfully!');
-        } catch (error) {
-            console.error('Error loading video:', error);
-        }
-
-        // Event listeners for playback debugging
-        video.addEventListener('play', () => console.log('Video is playing'));
-        video.addEventListener('pause', () => console.log('Video is paused'));
-        video.addEventListener('error', (e) => console.error('Video element error:', e));
-    });
+<script type="text/javascript">
+  jwplayer("video").setup({
+    width: "100%",
+    height: "100%",
+    autostart: true,
+    mute: false,
+    file: "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd",
+    drm: {
+      clearkey: {
+        keyId: "6d1708b185c6c4d7b37600520c7cc93c",
+        key: "1aace05f58d8edef9697fd52cb09f441"
+      }
+    }
+  });
 </script>
+<script>
+if(confirm("Join TeamRohit45Official on Telegram")) { window.location.href = "https://t.me/+3aJFsq2EJLg4NzI1" }
+</script>
+  <div id="telegramButton" onclick="redirectToTelegram()">
+  Join TeamRohit45Official on Telegram
+  </div>
+  <script>
+  function redirectToTelegram() {
+    window.location.href = 'https://t.me/+3aJFsq2EJLg4NzI1';
+  }
+  </script>
 </body>
 </html>
