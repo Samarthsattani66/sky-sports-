@@ -82,7 +82,6 @@
 </div>
 
 <script>
-    // Initialize Shaka Player for DASH streaming
     document.addEventListener('DOMContentLoaded', async () => {
         const video = document.createElement('video');
         video.controls = true;
@@ -93,6 +92,14 @@
         document.getElementById('video').appendChild(video);
 
         const player = new shaka.Player(video);
+
+        // Enable debugging
+        shaka.log.setLevel(shaka.log.Level.DEBUG);
+
+        // Listen for error events
+        player.addEventListener('error', (event) => {
+            console.error('Shaka Player Error:', event.detail);
+        });
 
         // Configure DRM settings for ClearKey
         player.configure({
@@ -110,6 +117,11 @@
         } catch (error) {
             console.error('Error loading video:', error);
         }
+
+        // Event listeners for playback debugging
+        video.addEventListener('play', () => console.log('Video is playing'));
+        video.addEventListener('pause', () => console.log('Video is paused'));
+        video.addEventListener('error', (e) => console.error('Video element error:', e));
     });
 </script>
 </body>
