@@ -101,11 +101,12 @@
             console.error('Shaka Player Error:', event.detail);
         });
 
-        // Configure DRM settings for ClearKey
+        // Configure DRM settings for multiple ClearKey keys
         player.configure({
             drm: {
                 clearKeys: {
-                    '6d1708b185c6c4d7b37600520c7cc93c': '1aace05f58d8edef9697fd52cb09f441'
+                    '6d1708b185c6c4d7b37600520c7cc93c': '1aace05f58d8edef9697fd52cb09f441', // Key 1
+                    '4e5c6d7f8e9a0b1c2d3e4f5a6789bcde': '123456789abcdef123456789abcdef00'  // Key 2 (replace with actual keys)
                 }
             }
         });
