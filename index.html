@@ -1,75 +1,118 @@
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TeamRohit45Official</title>
-<script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-</head>
-<style>
-body {
-    background-color: black;
-}
-#container {
-    background-color: black;
-}
-    #telegramButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 378px;
-      height: 50px;
-      background: linear-gradient(90deg, darkblue, #001f3f);
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      overflow: hidden;
-      position: relative;
-      animation: flowAnimation 2s infinite;
-    }
-
-    @keyframes flowAnimation {
-      0% {
-        background-position: -200px 0;
-      }
-      100% {
-        background-position: 200px 0;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEAMROHIT45OFFICIAL Stream</title>
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
         }
-    }
-
-    #telegramButton:hover {
-      animation: none; /* Pause animation on hover */
-      background: linear-gradient(90deg, #001f3f, darkblue); /* Reverse colors on hover */
-    }
-  </style>
+        #videoContainer {
+            margin-top: 20px;
+        }
+        #videoPlayer {
+            width: 80%;
+            max-width: 800px;
+            height: 450px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .popup button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .popup button.ok {
+            background-color: #28a745;
+            color: white;
+        }
+        .popup button.cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
 <body>
-<div id="video"></div>
+    <h1>Welcome to TEAMROHIT45OFFICIAL Stream</h1>
+    <div id="videoContainer" style="display: none;">
+        <video id="videoPlayer" controls></video>
+    </div>
 
-<script type="text/javascript">
-  jwplayer("video").setup({
-    width: "100%",
-    height: "100%",
-    autostart: true,
-    mute: false,
-    file: "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd",
-    drm: {
-      clearkey: {
-        keyId: "6d1708b185c6c4d7b37600520c7cc93c",
-        key: "1aace05f58d8edef9697fd52cb09f441"
-      }
-    }
-  });
-</script>
-<script>
-if(confirm("Join TeamRohit45Official on Telegram")) { window.location.href = "https://t.me/+3aJFsq2EJLg4NzI1" }
-</script>
-  <div id="telegramButton" onclick="redirectToTelegram()">
-  Join TeamRohit45Official on Telegram
-  </div>
-  <script>
-  function redirectToTelegram() {
-    window.location.href = 'https://t.me/+3aJFsq2EJLg4NzI1';
-  }
-  </script>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>Join this channel for more live links:</p>
+            <button class="ok" onclick="redirectTelegram()">Join Now</button>
+            <button class="cancel" onclick="closePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // ClearKey DRM License
+        const drmKey = {
+            "keys": [
+                {
+                    "kty": "oct",
+                    "k": "86a1ed6e96caab8eb1009fe530d2cf4f",
+                    "kid": "4e993aa8c1f295f8b94e8e9e6f6d0bfe"
+                }
+            ]
+        };
+
+        // MPD URL
+        const mpdUrl = "https://ottb.live.cf.ww.aiv-cdn.net/lhr-nitro/live/clients/dash/enc/lsdasbvglv/out/v1/bb548a3626cd4708afbb94a58d71dce9/cenc.mpd";
+
+        // Function to initialize video playback
+        function initializePlayer() {
+            const video = document.getElementById('videoPlayer');
+            const player = dashjs.MediaPlayer().create();
+            player.initialize(video, mpdUrl, true);
+            player.setProtectionData({
+                "org.w3.clearkey": {
+                    "clearkeys": drmKey.keys.reduce((acc, key) => {
+                        acc[key.kid] = key.k;
+                        return acc;
+                    }, {})
+                }
+            });
+        }
+
+        // Redirect to Telegram channel
+        function redirectTelegram() {
+            window.location.href = "https://t.me/+3aJFsq2EJLg4NzI1";
+        }
+
+        // Close the popup and show the video
+        function closePopup() {
+            document.getElementById('popup').style.display = "none";
+            document.getElementById('videoContainer').style.display = "block";
+            initializePlayer();
+        }
+    </script>
 </body>
 </html>
