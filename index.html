@@ -12,6 +12,8 @@
                 --button-hover-bg: #1565C0;
                 --logo-frame-color: #444444;
                 --dot-color: #ffff00; 
+                --telegram-button-bg: #007bff;
+                --telegram-button-hover-bg: #0056b3;
             }
 
             [data-theme="light"] {
@@ -21,6 +23,8 @@
                 --button-hover-bg: #45a049;
                 --logo-frame-color: #cccccc;
                 --dot-color: #ff0000; 
+                --telegram-button-bg: #007bff;
+                --telegram-button-hover-bg: #0056b3;
             }
 
             body {
@@ -29,48 +33,6 @@
                 font-family: Arial, sans-serif;
                 margin: 0;
                 padding: 20px;
-            }
-
-            @keyframes logo-frame-animation {
-                from { transform: scale(1); }
-                to { transform: scale(1.05); }
-            }
-
-            #link-container div {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-bottom: 20px;
-                text-align: center;
-                position: relative;
-            }
-
-            #link-container img {
-                width: 350px;
-                max-width: 100%;
-                border: 5px solid var(--logo-frame-color);
-                animation: logo-frame-animation 2s infinite alternate;
-                cursor: pointer; /* Make logo clickable */
-            }
-
-            #link-container div::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: var(--dot-color);
-                animation: dot-animation 3s infinite linear;
-            }
-
-            @keyframes dot-animation {
-                0% { transform: translateX(0); }
-                25% { transform: translateY(100%); }
-                50% { transform: translateX(100%); }
-                75% { transform: translateY(0); }
-                100% { transform: translateX(0); } 
             }
 
             .watch-button {
@@ -91,6 +53,24 @@
                 background-color: var(--button-hover-bg);
             }
 
+            .telegram-button {
+                display: inline-block;
+                padding: 10px 20px;
+                margin-top: 10px;
+                background-color: var(--telegram-button-bg);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .telegram-button:hover {
+                background-color: var(--telegram-button-hover-bg);
+            }
+
             .theme-toggle {
                 margin-bottom: 20px;
                 padding: 10px 20px;
@@ -106,6 +86,14 @@
             .theme-toggle:hover {
                 background-color: var(--button-hover-bg);
             }
+
+            #link-container div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -115,6 +103,7 @@
         <script>
             const m3uUrl = "https://raw.githubusercontent.com/drmlive/fancode-live-events/main/fancode.m3u";
             const linkPrefix = "https://shz.al/~Team_Rohit.html?videoUrl=";
+
             async function fetchAndDisplayLinks() {
                 try {
                     const response = await fetch(m3uUrl);
@@ -152,12 +141,19 @@
                                 linkContainer.appendChild(descriptionElem);
                             }
 
-                            const button = document.createElement("a");
-                            button.href = linkPrefix + encodeURIComponent(line);
-                            button.target = "_blank";
-                            button.textContent = "Click to Watch";
-                            button.className = "watch-button";
-                            linkContainer.appendChild(button);
+                            const watchButton = document.createElement("a");
+                            watchButton.href = linkPrefix + encodeURIComponent(line);
+                            watchButton.target = "_blank";
+                            watchButton.textContent = "Click to Watch";
+                            watchButton.className = "watch-button";
+                            linkContainer.appendChild(watchButton);
+
+                            const telegramButton = document.createElement("a");
+                            telegramButton.href = "https://t.me/+33IHK7BHR14xY2I1";
+                            telegramButton.target = "_blank";
+                            telegramButton.textContent = "Join My Telegram";
+                            telegramButton.className = "telegram-button";
+                            linkContainer.appendChild(telegramButton);
 
                             container.appendChild(linkContainer);
 
